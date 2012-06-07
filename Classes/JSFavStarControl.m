@@ -30,6 +30,13 @@
 	return self;
 }
 
+-(void) setRating:(NSInteger)rating{
+	if (rating != _rating){
+		_rating = rating;
+		[self setNeedsDisplay];
+	}
+}
+
 - (void)drawRect:(CGRect)rect
 {
 	CGPoint currPoint = CGPointZero;
