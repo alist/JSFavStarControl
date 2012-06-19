@@ -48,7 +48,7 @@
 		else
 			[@"★" drawAtPoint:currPoint withFont:[UIFont boldSystemFontOfSize:22]];
 			
-		currPoint.x += 20;
+		currPoint.x += 15;
 	}
 	
 	NSInteger remaining = RATING_MAX - _rating;
@@ -59,7 +59,7 @@
 			[_dot drawAtPoint:currPoint];
 		else
 			[@" •" drawAtPoint:currPoint withFont:[UIFont boldSystemFontOfSize:22]];
-		currPoint.x += 20;
+		currPoint.x += 15;
 	}
 }
 
