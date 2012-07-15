@@ -14,6 +14,7 @@
 @implementation JSFavStarControl
 
 @synthesize rating = _rating;
+@synthesize starSeperation;
 
 - (id)initWithLocation:(CGPoint)location dotImage:(UIImage *)dotImage starImage:(UIImage *)starImage
 {
@@ -23,11 +24,24 @@
 		self.backgroundColor = [UIColor clearColor];
 		self.opaque = NO;
 		
-		_dot = dotImage;
-		_star = starImage;
+		self.starSeperation = 15;
+		
+		[self setDotImage:dotImage starImage:starImage];
 	}
 	
 	return self;
+}
+
+-(void) setDotImage:(UIImage *)dotImage starImage:(UIImage *)starImage{
+	if (dotImage == nil)
+		return;
+	
+	_dot = dotImage;
+	_star = starImage;
+	
+	self.starSeperation = roundf([dotImage size].width * 1.05);
+	
+	[self setNeedsDisplay];
 }
 
 -(void) setRating:(NSInteger)rating{
@@ -48,7 +62,7 @@
 		else
 			[@"★" drawAtPoint:currPoint withFont:[UIFont boldSystemFontOfSize:22]];
 			
-		currPoint.x += 15;
+		currPoint.x += self.starSeperation;
 	}
 	
 	NSInteger remaining = RATING_MAX - _rating;
@@ -59,7 +73,7 @@
 			[_dot drawAtPoint:currPoint];
 		else
 			[@" •" drawAtPoint:currPoint withFont:[UIFont boldSystemFontOfSize:22]];
-		currPoint.x += 15;
+		currPoint.x += self.starSeperation;
 	}
 }
 
